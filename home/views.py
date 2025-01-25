@@ -6,6 +6,10 @@ from .models import User, Startup, PitchRequest
 def login_page(request):
     return render(request, 'login.html')
 
+def dashboard(request):
+    return render(request, 'dashboard.html', {'user': request.user})
+
+
 # Admin Dashboard
 @login_required
 def admin_dashboard(request):
