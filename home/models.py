@@ -4,6 +4,14 @@ from django.db import models
 
 # Custom User Model
 class User(AbstractUser):
+     
+     ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('coordinator', 'Coordinator'),
+        ('jury', 'Jury'),
+    ]
+     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='jury')
+     
      groups = models.ManyToManyField(
         Group,
         related_name="home_user_set",  # Custom related name

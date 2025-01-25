@@ -7,8 +7,16 @@ def login_page(request):
     return render(request, 'login.html')
 
 def dashboard(request):
-    return render(request, 'dashboard.html', {'user': request.user})
+    user = request.user
 
+    if user.role == 'admin':
+        return render(request='admin_dashboard.html')
+    elif user.role == 'coordinator':
+        return render(request='coordinator_dashboard.html')
+    elif user.role == 'jury':
+        return render (request='jury_dashboard.html')
+    else:
+        return render(request, 'error.html', {'message': 'Invalid role'})
 
 # Admin Dashboard
 @login_required
