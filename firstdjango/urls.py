@@ -18,9 +18,13 @@ from django.contrib import admin
 from django.urls import path
 
 from home.views import *
+from home import views
 
 urlpatterns = [
-    path('',home, name='home'),
-    path('about/',about, name='about'),
-    path('admin/', admin.site.urls),
-]
+    # path('',home, name='home'),
+    path('', login_page, name='login_page'),
+    path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('admin/approve/<int:pk>/', views.admin_approve_request, name='admin_approve_request'),
+    path('coordinator/dashboard/', views.coordinator_dashboard, name='coordinator_dashboard'),
+    path('coordinator/add-startup/', views.add_startup, name='add_startup'),
+    path('jury/dashboard/', views.jury_dashboard, name='jury_dashboard'),]

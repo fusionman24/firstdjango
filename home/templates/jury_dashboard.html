@@ -1,0 +1,15 @@
+<h1>Jury Dashboard</h1>
+<table>
+  <tr>
+    <th>Startup</th>
+    <th>Slides</th>
+  </tr>
+  {% for startup in startups %}
+  <tr>
+    <td>{{ startup.name }}</td>
+    <td>
+      <a href="{{ startup.slides.url }}" target="_blank">View Slides</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>

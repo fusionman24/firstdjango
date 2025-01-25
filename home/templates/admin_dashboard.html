@@ -1,0 +1,17 @@
+<h1>Admin Dashboard</h1>
+<table>
+  <tr>
+    <th>Startup</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  {% for startup in startups %}
+  <tr>
+    <td>{{ startup.name }}</td>
+    <td>{{ startup.status }}</td>
+    <td>
+      <a href="{% url 'admin_approve_request' startup.pk %}">Approve</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>

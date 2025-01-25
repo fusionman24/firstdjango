@@ -1,0 +1,14 @@
+<h1>Coordinator Dashboard</h1>
+<a href="{% url 'add_startup' %}">Add Startup</a>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  {% for startup in startups %}
+  <tr>
+    <td>{{ startup.name }}</td>
+    <td>{{ startup.description }}</td>
+  </tr>
+  {% endfor %}
+</table>
