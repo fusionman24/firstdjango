@@ -1,0 +1,33 @@
+<!-- startup_list.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Startups List</title>
+</head>
+
+<body>
+    <h1>Startups</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Founded Date</th>
+            <th>Industry</th>
+            <th>Description</th>
+            <th>Coordinator Name</th>
+            <th>Coordinator Email</th>
+        </tr>
+        {% for startup in startups %}
+        <tr>
+            <td>{{ startup.name }}</td>
+            <td>{{ startup.founded_date }}</td>
+            <td>{{ startup.industry }}</td>
+            <td>{{ startup.description }}</td>
+            <td>{{ startup.coordinator_name }}</td>
+            <td>{{ startup.coordinator_email }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

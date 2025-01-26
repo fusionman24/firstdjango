@@ -28,9 +28,10 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     # path('', login_page, name='login_page'),
     path('', LoginView.as_view(template_name='logginn.html'), name='login'),
-
+    path('startups/', startup_list, name='startup_list'),
     path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('admin/approve/<int:pk>/', views.admin_approve_request, name='admin_approve_request'),
     path('coordinator/dashboard/', views.coordinator_dashboard, name='coordinator_dashboard'),
     path('coordinator/add-startup/', views.add_startup, name='add_startup'),
-    path('jury/dashboard/', views.jury_dashboard, name='jury_dashboard'),]
+    path('jury/dashboard/', views.jury_dashboard, name='jury_dashboard'),
+    path('api/startups/', views.startup_list_api),]

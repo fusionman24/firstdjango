@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import User, Startup, PitchRequest
+from rest_framework.generics import ListAPIView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 # Login Page
 def login_page(request):
@@ -8,13 +11,16 @@ def login_page(request):
 
 def dashboard(request):
     user = request.user
-
+    
     if user.role == 'admin':
-        return render(request='admin_dashboard.html')
+        print(user.role)
+        return render(request,'admin_dashboard.html')
     elif user.role == 'coordinator':
-        return render(request='coordinator_dashboard.html')
+        print(user.role)
+        return render(request,'coordinator_dashboard.html')
     elif user.role == 'jury':
-        return render (request='jury_dashboard.html')
+        print(user.role)
+        return render (request,'jury_dashboard.html')
     else:
         return render(request, 'error.html', {'message': 'Invalid role'})
 
@@ -63,6 +69,16 @@ def add_startup(request):
         return redirect('coordinator_dashboard')
     return render(request, 'add_startup.html')
 
+@login_required
+def startup_list(request):
+    if not request.user.is_coordinator:
+        return render(request, 'unauthorized.html')
+
+    startups = Startup.objects.all()
+    return render(request, 'startup_list.html', {'startups': startups})
+
+
+
 # Jury Dashboard
 @login_required
 def jury_dashboard(request):
@@ -70,3 +86,17 @@ def jury_dashboard(request):
         return redirect('login_page')
     startups = Startup.objects.filter(status='approved')
     return render(request, 'jury_dashboard.html', {'startups': startups})
+
+@api_view(['GET'])
+def startup_list_api(request):
+    if not request.user.role == 'coordinator':
+        print(request.user)
+        print(request.user.role)
+        # return render(request, 'unauthorized.html')
+        return Response({'error': 'Unauthorized'}, status=403)
+
+    startups = User.objects.all()
+    data = list(startups.values())
+
+    # return render(request, 'startup_list.html', {'startups': startups})
+    return Response({'startups': data})

@@ -1,0 +1,18 @@
+<!-- add_startup.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Startup</title>
+</head>
+
+<body>
+    <h1>Add Startup</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+
+</html>
