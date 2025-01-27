@@ -2,30 +2,48 @@
 from django.contrib.auth.models import AbstractUser, Permission, Group
 from django.db import models
 
-# Custom User Model
+
 class User(AbstractUser):
-     
-     ROLE_CHOICES = [
+    ROLE_CHOICES = [
         ('admin', 'Admin'),
-        ('coordinator', 'Coordinator'),
         ('jury', 'Jury'),
     ]
-     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='jury')
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='jury')
+
+    def __str__(self):
+        return f"{self.username} ({self.role})"
+    
+# Custom User Model
+
+# class User(AbstractUser):
      
-     groups = models.ManyToManyField(
-        Group,
-        related_name="home_user_set",  # Custom related name
-        blank=True,
-        help_text="The groups this user belongs to.",
-        verbose_name="groups",
-    )
-     user_permissions = models.ManyToManyField(
-        Permission,
-        related_name="home_user_set_permissions",  # Custom related name
-        blank=True,
-        help_text="Specific permissions for this user.",
-        verbose_name="user permissions",
-    )
+#      ROLE_CHOICES = [
+#         ('admin', 'Admin'),
+#         # ('coordinator', 'Coordinator'),
+#         ('jury', 'Jury'),
+#     ]
+
+#      role= models.OneToOneField('self', on_delete=models.CASCADE, default='jury')
+#     #  eurekaid = models.CharField(max_length=20, choices=ROLE_CHOICES,unique=True, default='jury')
+#      def __str__(self):
+#         return f"{self.username} ({self.role})"
+
+#      groups = models.ManyToManyField(
+#         Group,
+#         related_name="home_user_set",  # Custom related name
+#         blank=True,
+#         help_text="The groups this user belongs to.",
+#         verbose_name="groups",
+#     )
+#      user_permissions = models.ManyToManyField(
+#         Permission,
+#         related_name="home_user_set_permissions",  # Custom related name
+#         blank=True,
+#         help_text="Specific permissions for this user.",
+#         verbose_name="user permissions",
+#     )
+        
+        
 # Startup Model
 class Startup(models.Model):
     name = models.CharField(max_length=200)

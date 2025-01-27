@@ -23,7 +23,7 @@ from home import views
 urlpatterns = [
     # path('',home, name='home'),
     path('admin/', admin.site.urls),
-    path('login', LoginView.as_view(template_name='logginn.html'), name='login'),
+    # path('login', LoginView.as_view(template_name='logginn.html'), name='login'),
     path('logout', LogoutView.as_view(next_page='login'), name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
     # path('', login_page, name='login_page'),
@@ -34,4 +34,5 @@ urlpatterns = [
     path('coordinator/dashboard/', views.coordinator_dashboard, name='coordinator_dashboard'),
     path('coordinator/add-startup/', views.add_startup, name='add_startup'),
     path('jury/dashboard/', views.jury_dashboard, name='jury_dashboard'),
-    path('api/startups/', views.startup_list_api),]
+    path('api/startups/', views.startup_list_api),
+    path('api/login/', login_page,name='login_user'),]
