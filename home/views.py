@@ -108,14 +108,16 @@ def jury_dashboard(request):
 
 @api_view(['GET'])
 def startup_list_api(request):
-    if not request.user.role == 'coordinator':
-        print(request.user)
-        print(request.user.role)
+    # CODE GOES HERE
+    authheader=request.headers['Authorization']
+    print(authheader)
+    req_user=User.objects.get(username=authheader)
+    if req_user.role == 'jury':
         # return render(request, 'unauthorized.html')
         return Response({'error': 'Unauthorized'}, status=403)
 
-    startups = User.objects.all()
+    startups = Startup.objects.all()
     data = list(startups.values())
 
     # return render(request, 'startup_list.html', {'startups': startups})
-    return Response({'startups': data})
+    return Response(data)
