@@ -68,16 +68,4 @@ class PitchRequest(models.Model):
     def __str__(self):
         return f"Request for {self.startup.name} by {self.coordinator.username}"
     
-    class Score(models.Model):
-        pitch_deck = models.CharField(max_length=255)
-        startup_idea = models.CharField(max_length=255)
-        target_market = models.CharField(max_length=255)
-        growth_potential = models.CharField(max_length=255)
-        revenue_model = models.CharField(max_length=255)
-        stage_of_startup = models.CharField(max_length=255)
-        team_members = models.CharField(max_length=255)
-        total_score = models.CharField(max_length=255)
-        feedback = models.TextField()
-
-    def __str__(self):
-        return f"Score for {self.startup_idea}"
+  

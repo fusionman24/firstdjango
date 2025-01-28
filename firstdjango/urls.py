@@ -19,6 +19,9 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from home.views import *
 from home import views
+# from scoresheet import views
+from scoresheet.views import SaveScoreView
+
 
 urlpatterns = [
     # path('',home, name='home'),
@@ -35,4 +38,5 @@ urlpatterns = [
     path('coordinator/add-startup/', views.add_startup, name='add_startup'),
     path('jury/dashboard/', views.jury_dashboard, name='jury_dashboard'),
     path('api/startups/',startup_list_api, name='startup_list_api'),
-    path('api/login/', login_page,name='login_user'),]
+    path('api/login/', login_page,name='login_user'),
+    path('api/savescore/', SaveScoreView.as_view(), name='save-scores')]
